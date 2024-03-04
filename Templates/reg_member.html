@@ -1,0 +1,36 @@
+{% extends "index.html" %}
+
+{% block title %}
+Register a New Member
+{% endblock title %}
+
+{% block body %}
+<div class="container mt-5">
+    <div class="row">
+    
+    <div class="col-md-4"></div>
+    <div class="col-md-4">
+        <h4 class="text-center"> Add New Member </h4>
+        <br>
+        <form action='/reg_member' method='POST'>
+            <div class="mb-3">
+              <label for="member_name" class="form-label">Name</label>
+              <input type="text" class="form-control" id="member_name" name="member_name" required>
+            </div>
+            <div class="mb-3">
+                <label for="email" class="form-label">Email Address</label>
+                <input type="email" class="form-control" id="email" name="email" required>
+                <small id="emailHelp" class="form-text text-muted"> 
+                </small>
+              </div>
+            <button type="submit" class="btn btn-outline-success btn-sm btn-block">Enter</button>
+        </form>
+        <br>
+        Already a Member? Wanna borrow a Book <a href="/b_book"> Borrow A Book </a>
+        <br>
+    </div>
+    <div class="col-md-4"></div>
+    
+    </div>
+    </div>
+{% endblock body %}

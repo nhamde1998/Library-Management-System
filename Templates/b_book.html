@@ -1,0 +1,84 @@
+{% extends "index.html" %}
+
+{% block title %}
+Borrow A Book
+{% endblock title %}
+
+{% block body %}
+<div class="container mt-5">
+    <div class="row">
+    
+    <div class="col-md-4"></div>
+    <div class="col-md-4">
+        <h4 class="text-center"> Borrow A Book </h4>
+        <br>
+        <form action='/b_book' method='POST'>
+            <div class="mb-3">
+              <label for="title" class="form-label">Search By Title</label>
+              <input type="text" class="form-control" id="title" name="title">
+            </div>
+            <div class="mb-3">
+                <label for="author" class="form-label">Search By Author</label>
+                <input type="text" class="form-control" id="author" name="author">
+            </div>
+            <div class="mb-3">
+                <label for="genre" class="form-label">Search By Genre</label>
+                <input type="text" class="form-control" id="genre" name="genre">
+            </div>
+            <button type="submit" class="btn btn-outline-success btn-sm btn-block">Enter</button>
+        </form>
+            </div>
+
+        </div>
+      {% if books is defined %}
+        {% if books %}
+                <div class="row mt-3">
+                    {% for book in books %}
+                        <div class="col-md-4">
+                            <div class="card mb-3">
+                                <div class="card-body">
+                                    <h5 class="card-title">{{ book[1] }}</h5>
+                                    <p class="card-text">Author: {{ book[2] }}</p>
+                                    <p class="card-text">Genre: {{ book[3] }}</p>
+                                    <form action="/borrowing" method="POST">
+                                        <input type="hidden" name="book_id" value="{{ book[0] }}">
+                                        <button type="submit" class="btn btn-primary">Borrow</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% else %}
+                <p class="text-center">No books found matching your search criteria.</p>
+        {% endif %}
+      {% endif %}
+
+      {% if book_id is defined %}
+        {# Borrow form for POST request #}
+            {% if book_id %}
+                <div class="row mt-3">
+                    <div class="col-md-4">
+                        <div class="card mb-3">
+                            <div class="card-body">
+                              <form id='borrowForm' action='/borrowing' method='POST'>
+                                <div class="mb-3">
+                                  <label for="borrower" class="form-label">Enter Your Member Name</label>
+                                  <input type="text" class="form-control" id="borrower" name="borrower" required>
+                                  <button type="submit" class="btn btn-primary">Submit</button>
+                                </div>
+                              </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
+      {% endif %}
+
+        </div>
+    <div class="col-md-4"></div>
+    
+    </div>
+    </div>
+
+{% endblock body %}
